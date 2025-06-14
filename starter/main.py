@@ -52,7 +52,7 @@ balance = 0
 
 #function to read keys from keypad and add it to a queue, press # to finish reading keys
 def read_key():
-    global confirmed, cost
+    global confirmed, cost,queue
     if confirmed==False:
         key = keypad.get_key()
         if key in "123456789":
