@@ -99,6 +99,7 @@ def dispense_item():
         paid = True
         servos[int(queue) - 1].duty_u16(max_duty)
         time.sleep(0.4)
+        servos[int(queue) - 1].duty_u16(half_duty)
 
 
 # Main loop
