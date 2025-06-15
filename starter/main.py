@@ -17,7 +17,7 @@ COSTMAP = [1, 1, 1,
 
 
 # Initialize I2C protocol
-i2c = I2C(0, sda = Pin(0), scl = Pin(1), freq = 400000)
+i2c = I2C(0, sda = Pin(6), scl = Pin(7), freq = 400000)
 devices = i2c.scan()
 
 # Initialize LCD
@@ -32,16 +32,16 @@ except:
 
 # Initialize keypad
 # keymap, number of row pins, GPIO pins of row pins, GPIO pins of column pins
-keypad = Keypad(KEYMAP, ROW_PINS = [3, 4, 5, 6], COLUMN_PINS = [0, 1, 2], NUM_ROWS = 4, NUM_COLS = 3)
+keypad = Keypad(KEYMAP, ROW_PINS = [11, 12, 13, 14], COLUMN_PINS = [8, 9, 10], NUM_ROWS = 4, NUM_COLS = 3)
 
 # > 400 ms between each button press
 keypad.set_debounce_time(400)
 
 # Initialize IR sensor
-ir = Pin(17, Pin.IN, Pin.PULL_DOWN)
+ir = Pin(20, Pin.IN, Pin.PULL_DOWN)
 
 # Initialize servos with pins 0-9
-servos = [PWM(Pin(i)) for i in range(10)]
+servos = [PWM(Pin(i)) for i in range (5), PWM(Pin(j)) for j in range (16, 20)]
 
 # Set duty cycle
 max_duty = 65535
@@ -98,7 +98,7 @@ def display():
 def read_coin():
     global balance
     
-    val = ir_sensor.value()
+    val = ir.value()
     if val == 0:
         balance += 1
         time.sleep(0.1)
