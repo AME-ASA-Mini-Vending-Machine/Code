@@ -41,7 +41,7 @@ keypad.set_debounce_time(400)
 ir = Pin(20, Pin.IN, Pin.PULL_DOWN)
 
 # Initialize servos with pins 0-9
-servos = [PWM(Pin(i)) for i in range (5), PWM(Pin(j)) for j in range (16, 20)]
+servos = [PWM(Pin(i)) for i in list(range(5)) + list(range(16, 20))]
 
 # Set duty cycle
 max_duty = 65535
@@ -66,7 +66,7 @@ def read_key():
         elif key == "#":
             if len(queue) == 1:
                 confirmed = True
-                cost = COSTMAP[int(queue)]
+                cost = COSTMAP[int(queue)-1]
             else:
                 lcd.putstr("Not a valid code. Try again.")
                 time.sleep(1)
@@ -109,7 +109,10 @@ def dispense_item():
     
     if balance >= cost:
         paid = True
-        servos[int(queue) - 1].turn_cv()
+        if(int(queue)<=5):
+            servos[int(queue)-1].turn_cv()
+        else:
+            servos[int(queue)+9].turn_cv()
         time.sleep(0.4)
 
 # Main loop
