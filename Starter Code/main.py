@@ -4,7 +4,6 @@ from machine import I2C, Pin, PWM
 from I2C_LCD import I2CLcd
 from micropython_servo_pdm_360 import ServoPDM360
 
-
 # corresponds to 3x4 keypad layout
 KEYMAP = ["1", "2", "3",
           "4", "5", "6",
@@ -14,7 +13,6 @@ KEYMAP = ["1", "2", "3",
 COSTMAP = [1, 1, 1,
            2, 2, 2,
            3, 3, 3]
-
 
 # Initialize I2C protocol
 i2c = I2C(0, sda = Pin(6), scl = Pin(7), freq = 400000)
